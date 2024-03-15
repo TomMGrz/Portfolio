@@ -1,0 +1,55 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <h3>{% trans 'Menu' %}</h3>
+            <div class="list-group">
+                {% for category in categories %}
+                <a href="{% url 'store_by_category' category.0 %}" class="list-group-item list-group-item-action">
+                    {{ category.1 }}
+                </a>
+                {% if current_category == category.0 %}
+                    <div class="subcategories">
+                        {% for subcat in subcategories %}
+                        <a href="{% url 'store_by_subcategory' category.0 subcat %}" class="list-group-item list-group-item-action subcategory-item">
+                            {{ subcat }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'store' %}">{% trans 'Home' %}</a></li>
+                    {% if current_category %}
+                        <li class="breadcrumb-item"><a href="{% url 'store_by_category' current_category %}">{{ current_category }}</a></li>
+                        {% if current_subcategory %}
+                            <li class="breadcrumb-item active" aria-current="page">{{ current_subcategory }}</li>
+                        {% endif %}
+                    {% else %}
+                        <li class="breadcrumb-item active" aria-current="page">{% trans 'All Products' %}</li>
+                    {% endif %}
+                </ol>
+            </nav>
+            <div class="row">
+                {% for product_display in product_displays %}
+                <div class="col-lg-4">
+                    <div class="box product">
+                        <img class="product-thumbnail" src="{{ product_display.image.url }}">
+                        <h6><strong>{{ product_display.name }} {{ product_display.color }}</strong></h6>
+                        <a class="btn btn-outline-success" href="{% url 'product' product_display.name product_display.color product_display.product.length product_display.product.subcategory %}">{% trans "View" %}</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

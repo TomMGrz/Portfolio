@@ -1,0 +1,45 @@
+from django.urls import path
+from . import views
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('', views.store, name="store"),
+    path('store/', views.store, name="store"),
+    path('store/<str:category_name>/', views.store, name="store_by_category"),
+    path('store/<str:category_name>/<str:subcategory_name>/', views.store, name="store_by_subcategory"),
+    path('catalog/', views.catalog, name="catalog"),
+    path('about_us/', views.about_us, name="about_us"),
+    path('cart/', views.cart, name="cart"),
+    path('user_profile/', views.user_profile, name="user_profile"),
+    path('user_profile_addresses/', views.user_profile_addresses, name="user_profile_addresses"),
+    path('save_shipping_address/', views.save_shipping_address, name='save_shipping_address'),
+    path('user_profile_login_data/', views.user_profile_login_data, name="user_profile_login_data"),
+    path('password_change/',auth_views.PasswordChangeView.as_view(template_name='store/password_change.html'), name='password_change'),
+    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='store/password_change_done.html'), name='password_change_done'),
+    path('user_profile_orders/', views.user_profile_orders, name="user_profile_orders"),
+    path('checkout/', views.checkout, name="checkout"),
+    path('product/<str:product_name>/<str:product_color>/<int:product_length>/<str:product_subcategory>', views.product, name="product"),
+    path('update_item/', views.update_item, name="update_item"),
+    path('process_order/', views.process_order, name="process_order"),
+    path('login/', views.custom_login, name='login'),
+    path('register/', views.custom_register, name="register"),
+    path('confirm_email/', views.confirm_email, name='confirm_email'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('delete_account/', views.delete_account, name='delete_account'),
+    path('account_delete_confirm/', views.account_delete_confirm, name='account_delete_confirm'),
+    path('set_language/<str:language_code>/', views.set_language, name='set_language'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='store/password_reset.html'), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='store/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='store/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('login/', auth_views.PasswordResetCompleteView.as_view(template_name='store/login.html'), name='password_reset_complete'),
+    path('User_profile_order_page/<str:order_id>', views.user_profile_order_page, name='user_profile_order_page'),
+    path('terms_of_service/', views.terms_of_service, name='terms_of_service'),
+    path('terms-of-service/download/', views.terms_of_service_pdf, name='terms_of_service_pdf'),
+    path('get_shipping_prices/', views.get_shipping_prices, name='get_shipping_prices'),
+    path('return/', views.return_request, name='return'),
+    path('return/fetch_order_items/', views.fetch_order_items, name='fetch_order_items'),
+    path('return/return_details/', views.return_details, name='return_details'),
+    path('return/return_details/process_return', views.process_return, name='process_return'),
+
+]
+

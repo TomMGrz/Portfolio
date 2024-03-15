@@ -1,0 +1,57 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="box" id="form-wrapper">
+        <div class="form-label">
+            <p><strong>{% trans "Create account" %}</strong></p>
+        </div>
+        <form id="form" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">{% trans form.first_name.label %}:</label>
+                <br>
+                <input type="text" name="first_name" style="width: 230px">
+            </div>
+            <div class="form-group">
+                <label for="last_name">{% trans form.last_name.label %}:</label>
+                <br>
+                <input type="text" name="last_name" style="width: 230px">
+            </div>
+            <div class="form-group">
+                <label for="email">{% trans form.email.label %}:</label>
+                <br>
+                <input type="email" name="email" style="width: 230px">
+            </div>
+            <div class="form-group">
+                <label for="phone_number">{% trans form.phone_number.label %}:</label>
+                <br>
+                <input type="phone_number" name="phone_number" style="width: 230px">
+            </div>
+            <div class="form-group">
+                <label for="password1"><label for="password1">{% trans form.password1.label %}:</label>
+                <br>
+                <input type="password" name="password1" style="width: 230px">
+            </div>
+            <div class="form-group">
+                <label for="password2">{% trans form.password2.label %}:</label>
+                <br>
+                <input type="password" name="password2" style="width: 230px">
+            </div>
+            <hr>
+            <button  class="btn btn-primary" type="submit">{% trans "Register" %}</button>
+        </form>
+        <p>{% trans "Already have an account?" %} <a href="{% url 'login' %}">{% trans "Get back to login" %}</a></p>
+        {% if messages %}
+        <div class="alert alert-danger">
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

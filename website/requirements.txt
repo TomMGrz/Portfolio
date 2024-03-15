@@ -1,0 +1,8 @@
+dotenv
+django
+pathlib
+django-cryptography
+json
+requests
+modeltranslation
+re

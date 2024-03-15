@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Potwierdzenie przyjęcia prośby o zwrot zamówienia</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f6f6f6; font-family: Arial, sans-serif;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; margin-top: 15px;">
+        <tr>
+            <td align="center" bgcolor="#044f99" style="padding: 40px 0;">
+                <img src="http://placehold.it/200x50/044f99/ffffff?text=LOGO" alt="Logo Firmy" width="200" height="50" style="display: block;">
+            </td>
+        </tr>
+
+        <tr>
+            <td bgcolor="#ffffff" style="padding: 40px 30px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">
+                            <h1 style="color: #333333; font-size: 24px; margin: 0;">Potwierdzenie Zwrotu Zamówienia</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 20px 0 30px 0;">
+                            <p style="margin: 0;">Szanowny(a) {{ customer.first_name }} {{ customer.last_name }},</p>
+                            <p style="margin: 20px 0;">Twoje żądanie zwrotu o ID: {{ return_request.return_id }} dla zamówienia {{ return_request.order.order_id }} zostało potwierdzone.</p>
+                            <hr>
+                            <p style="margin: 0;">Prosimy o wysłanie przedmiotów do zwrotu na poniższy adres:</p>
+                            <p style="margin: 0;">Ulica: Sportowa 8</p>
+                            <p style="margin: 0;">Miasto: Kwaśniów Górny</p>
+                            <p style="margin: 0;">Kod pocztowy: 32-310</p>
+                            <p style="margin: 0;">Kraj: Polska</p>
+                            <p style="margin: 0;">Zwrot środków zostanie przetworzony na podany numer konta bankowego po pozytywnej weryfikacji zwróconych przedmiotów.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 20px;">
+                            <h2 style="color: #333333; font-size: 20px; margin: 0; padding-bottom: 5px;">Szczegóły Zwrotu:</h2>
+                            {% for return_item in return_items %}
+                            <p style="margin: 0;">Produkt: {{ return_item.product.name }}</p>
+                            <p style="margin: 0;">Ilość: {{ return_item.quantity }}</p>
+                            <p style="margin: 0;">Wartość: {{return_item.get_total }} PLN</p>
+                            {% endfor %}
+                            <p style="margin: 0;">Łączna Wartość: {{ return_request.get_total_value }} PLN</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding-top: 20px; border-top: 2px solid #eeeeee;">
+                            <p style="margin: 0;">Powód Zwrotu: {{ return_request.reason }}</p>
+                            <p style="margin: 0;">Data Dodania Zwrotu: {{ return_request.adding_date }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 30px;">
+                            <p style="margin: 0;">Przetwarzamy Twój zwrot. Będziemy Cię informować o statusie.</p>
+                            <p style="margin: 0;">Dziękujemy za zakupy u nas!</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td bgcolor="#044f99" style="padding: 30px 30px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="color: #ffffff; font-size: 14px; text-align: center;">
+                            &copy; 2024 Sławomir Grzanka. Wszelkie prawa zastrzeżone.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

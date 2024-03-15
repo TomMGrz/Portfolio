@@ -1,0 +1,59 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <a class="btn btn-outline-secondary" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+                <br><br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">{% trans "Item" %}</th>
+                            <th scope="col">{% trans "Price" %}</th>
+                            <th scope="col">{% trans "Quantity" %}</th>
+                            <th scope="col">{% trans "Total Price" %}</th>
+                            <th scope="col">{% trans "Total Weight" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>
+                                <img class="row-image" src="{{ item.product.image.url }}" width="50" height="50"><br>
+                                <p>{{ item.product.name }} {{ item.product.color }} {{ item.product.length }} m</p>
+                            </td>
+                            <td>{{ item.product.price|floatformat:2 }} PLN</td>
+                            <td>
+                                <div class="quantity">
+                                    <img data-product="{{ item.product.id }}" data-action="add" class="chg-quantity update-cart arrow-up" src="{% static 'images/arrow_up.png' %}"width="15" height="10">
+                                    <p class="quantity-number">{{ item.quantity }}</p>
+                                    <img data-product="{{ item.product.id }}" data-action="remove" class="chg-quantity update-cart arrow-down" src="{% static 'images/arrow_down.png' %}"width="15" height="10">
+                                </div>
+                                
+                            </td>
+                            <td><strong>{{ item.get_total|floatformat:2 }} PLN</strong></td>
+                            <td><strong>{{ item.get_total_weight }} kg</strong></td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="2"><strong>{% trans "Total: " %}</strong></td>
+                            <td><strong>{{ order.get_cart_items }}</strong></td>
+                            <td><strong>{{ order.get_cart_total|floatformat:2 }} PLN</strong></td>
+                            <td><storng> {{ order.get_cart_weight|floatformat:2 }} kg</storng></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-success" href="{% url 'checkout' %}">{% trans "Checkout" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+

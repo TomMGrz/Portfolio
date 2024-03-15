@@ -1,0 +1,29 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="container">
+    <div class="catalog-introduction">
+        <h2>{% trans "Discover More with Our Extended Catalog" %}</h2>
+        <p>{% trans "While our store showcases a curated selection of products, our catalog opens up a world of possibilities. Dive into our extensive range where we craft each item with care, ensuring quality and uniqueness. Whether you're looking for something specific or browsing for inspiration, our catalog is designed to cater to your every need, with even more options to choose from." %}</p>
+    </div>
+    <hr>
+    <div class="row">
+        {% for item in catalog_items %}
+        <div class = "col-lg-4">
+            <div class="box catalog">
+                <div class="catalog-name">
+                    <p><strong>{{ item.name }}</strong></p>
+                </div>
+                <img class="catalog-thumbnail" src="{{ item.image.url }}" >
+                <div class="catalog-description-box">
+                    <p class="catalog-description">{{ item.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

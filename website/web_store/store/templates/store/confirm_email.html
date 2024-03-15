@@ -1,0 +1,29 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="Confirmation">
+    <h1>Email Confirmation</h1>
+    {% if not user.customer.email_confirmed %}
+        <form method="post" action="{% url 'confirm_email' %}">
+            {% csrf_token %}
+            <label for="code">Enter Confirmation Code:</label>
+            <input type="text" name="code" id="code">
+            <button type="submit">Confirm</button>
+        </form>
+    {% else %}
+        <p>Your email has been successfully confirmed. You can now log in to your account.</p>
+        <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+    {% if messages %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <div class='back-to-profile'>
+        <a class="btn btn-outline-dark" href="{% url 'user_profile' %}">{% trans 'Back' %}</a>
+    </div>
+
+    <div class="info-columns">
+        <div class="order-info">
+            <p><strong>{% trans 'Order data: ' %}</strong></p>
+            <p>{% trans 'Order id: ' %}{{ order.order_id }}</p>
+            <p>{% trans 'Order date: ' %} {{ order.order_date }}</p>
+        </div>    
+
+        <div class="customer-info">
+            <p><strong>{% trans 'Customer: ' %}</strong></p>
+            <p>{% trans 'Name: ' %} {{ order.customer.first_name }} {{ order.customer.last_name }} </p>
+            <p>Email: {{ order.customer.email }}</p>
+        </div>
+
+        <div class="shipping-info">
+            <p><strong>{% trans 'Shipping address:' %}</strong></p>
+            <p>{% trans 'Street: ' %}{{ order.shipping_address.address }}</p>
+            <p>{% trans 'City: ' %}{{ order.shipping_address.city }}</p>
+            <p>{% trans 'Postal code: ' %}{{ order.shipping_address.postal_code }}</p>
+            <p>{% trans 'Country: ' %}{{ order.shipping_address.country }}</p>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans "Item" %}</th>
+                <th scope="col">{% trans "Price" %}</th>
+                <th scope="col">{% trans "Quantity" %}</th>
+                <th scope="col">{% trans "Total Price" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order_items %}
+            <tr>
+                <td>
+                    <img class="row-image" src="{{ item.product.image.url }}" width="50" height="50"><br>
+                    <p><strong>{{ item.product.name }} {{ item.product.length }} m</strong> </p>
+                </td>
+                <td>
+                    <p><strong>{{ item.product.price }} PLN</strong></p>
+                </td>
+                <td>
+                    <p><strong>{{ item.quantity }}</strong></p>
+                </td>
+                <td>
+                    <p><strong>{{ order.full_price }} PLN</strong></p>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

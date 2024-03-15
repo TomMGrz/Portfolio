@@ -1,0 +1,41 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <div class="back-to-profile">
+        <a class="btn btn-outline-dark" href="{% url 'user_profile' %}">{% trans 'Back' %}</a>
+    </div>
+
+    <!-- New wrapper div for centering content -->
+    <div class="profile-wrapper">
+        <div class="user-profile-data">
+            {% csrf_token %}
+            <h2>{% trans "User Profile Data" %}</h2>
+            <p><strong>{% trans "First Name" %}:</strong> {{ user.first_name }}</p>
+            <p><strong>{% trans "Last Name" %}:</strong> {{ user.last_name }}</p>
+            <p><strong>{% trans "Email" %}:</strong> {{ user.email }}</p>
+            <p><strong>{% trans "Phone Number" %}:</strong> {{ user.phone_number }}</p>
+            <div class="change-password">
+                <p><strong>{% trans "Password" %}:</strong> ********</p>
+                <a class="btn btn-primary" href="{% url 'password_change' %}">{% trans "Change Password" %}</a> 
+            </div>
+            <div class="delete-account">
+                <p>{% trans "Delete account" %}</p>
+                <a class="btn btn-primary" href="{% url 'account_delete_confirm' %}">{% trans 'Delete account' %}</a>
+                {% if messages %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

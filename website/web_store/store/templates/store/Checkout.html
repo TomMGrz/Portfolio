@@ -1,0 +1,377 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box" id="form-wrapper">
+            <form id="form">
+                <p><strong>{% trans "Shipping information" %}</strong></p>
+                {% csrf_token %}
+                <div id="user-info">
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="first_name" placeholder="{% trans 'First name...' %}" value="{% if shipping_addresses %}{{ shipping_addresses.0.customer.first_name }}{% endif %}">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="last_name" placeholder="{% trans 'Last name...' %}"value="{% if shipping_addresses %}{{ shipping_addresses.0.customer.last_name }}{% endif %}">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="email" name="email" placeholder="{% trans 'Email...' %}"value="{% if shipping_addresses %}{{ shipping_addresses.0.customer.email }}{% endif %}">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="phone_number" placeholder="{% trans 'Phone number...' %}"value="{% if shipping_addresses %}{{ shipping_addresses.0.customer.phone_number}}{% endif %}">
+                    </div>
+                </div>
+                <hr>
+                <div id="shipping-info">
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="address" placeholder="{% trans 'Address...' %}" value="{% if shipping_addresses %}{{ shipping_addresses.0.address }}{% endif %}">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="city" placeholder="{% trans 'City...' %}" value="{% if shipping_addresses %}{{ shipping_addresses.0.city }}{% endif %}">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="postalcode" placeholder="{% trans 'Postal-code...' %}" value="{% if shipping_addresses %}{{ shipping_addresses.0.postal_code }}{% endif %}">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-control" name="country" id="country-select">
+                            <option value="">{% trans 'Select Country...' %}</option>
+                            {% for country in countries %}
+                            <option value="{{ country.name }}" {% if shipping_addresses and shipping_addresses.0.country.code == country.code %}selected{% endif %}>
+                                {{ country.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <input class="form-check-input" type="checkbox" id="is-company" name="is_company">
+                        <label for="is-company">{% trans "I am a company" %}</label>
+                    </div>
+                    <div id="invoice-form">
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="firm" placeholder="{% trans 'Firm...' %}">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="nip" placeholder="{% trans 'Tax identification number...' %}">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="invoice_address" placeholder="{% trans 'Address...' %}">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="invoice_city" placeholder="{% trans 'City...' %}">
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="invoice_postalcode" placeholder="{% trans 'Postal-code...' %}">
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-control" name="invoice_country" id="invoice-country-select">
+                                <option value="">{% trans 'Select Country...' %}</option>
+                                {% for country in countries %}
+                                <option value="{{ country.name }}">
+                                    {{ country.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" id="same-address" name="same_address">
+                        <label for="same-address">{% trans "Use shipping address as invoice address" %}</label>
+                    </div>
+                    
+                    </div> 
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" type="checkbox" id="terms-checkbox" name="terms_checkbox">
+                    <label for="terms-checkbox">{% trans "I have read and agree to the" %} <a href="{% url 'terms_of_service' %}" target="_blank">{% trans "Terms of Service" context "checkout" %}</a></label>
+                </div>
+                <button id="select-delivery-method" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#deliveryMethodModal">
+                    {% trans 'Select Delivery Method' %}
+                </button>                
+                <hr>
+                <button id="order-button" class="btn btn-success btn-block" type="button">
+                    {% trans 'Place order and pay via ' %}
+                    <a href="https://tpay.com/jak-to-dziala" target="_blank" title="Obsługujemy płatności internetowe przez system płatności online Tpay">
+                        <img src="https://tpay.com/img/banners/logo-tpay-50x25.svg" style="border:0" alt="Logo Tpay" title="Logo Tpay"/>
+                    </a>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="box">  
+            <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; {% trans "Back to cart" %}</a>
+            <hr>
+            <h3>{% trans 'Order Summary' %}</h3>
+            <hr>
+            {% for item in items %}
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="{{ item.product.image.url }}" alt="{% trans 'Product Image' %}" style="width: 50px; height: 50px;"></div>
+                <div style="flex:2"><p>{{ item.product.name }} {{ item.product.length }} m, {{ item.product.price }} PLN x {{ item.quantity }}</p></div>
+            </div>
+            {% endfor %}
+            <h5>{% trans 'Items:' %} {{ order.get_cart_items }}</h5>
+            <h5>{% trans 'Total Weight:' %} {{ order.get_cart_weight|floatformat:2 }} kg</h5>
+            <h5 id="shipping-cost">{% trans 'Shipping price:' %} {{ order.shipping_cost }}</h5>
+            <h5 id="total-cost">{% trans 'Total:' %} {{ order.get_cart_total }} PLN</h5>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deliveryMethodModal" tabindex="-1" aria-labelledby="deliveryMethodModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deliveryMethodModalLabel">{% trans 'Choose Delivery Method' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="deliveryMethod" id="deliveryMethod1" value="DPD">
+                    <label class="form-check-label" for="deliveryMethod">
+                        DPD - <span id="DPD-price"></span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="deliveryMethod" id="deliveryMethod1" value="Pocztex">
+                    <label class="form-check-label" for="deliveryMethod">
+                        Pocztex - <span id="Pocztex-price"></span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="deliveryMethod" id="deliveryMethod1" value="FedEx">
+                    <label class="form-check-label" for="deliveryMethod">
+                        FedEx - <span id="FedEx-price"></span>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="deliveryMethod" id="deliveryMethod1" value="{% trans 'Self pickup' %}">
+                    <label class="form-check-label" for="deliveryMethod">
+                        {% trans 'Self pickup' %} - <span id="SelfPickup-price"></span>
+                    </label>
+                </div>
+ 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirm-delivery-method">{% trans 'Confirm' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    var total = '{{ order.get_cart_total }}';
+    var isUserAuthenticated = '{{ user.is_authenticated|lower }}';
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    // user data forms
+
+    if (isUserAuthenticated === 'true') {
+        var userInfoForm = document.getElementById('user-info');
+        userInfoForm.classList.add('disabled-form');
+        Array.from(userInfoForm.getElementsByTagName('input')).forEach(function(input) {
+            input.disabled = true;
+        });
+    }
+
+
+    document.getElementById('order-button').disabled = true;
+    var invoiceForm = document.getElementById('invoice-form');
+    invoiceForm.style.display = 'none';
+
+    function validateTerms() {
+        var termsCheckbox = document.getElementById('terms-checkbox');
+        return termsCheckbox.checked;
+    }
+
+    document.getElementById('terms-checkbox').addEventListener('change', function() {
+        document.getElementById('order-button').disabled = !this.checked;
+    });
+
+    document.getElementById('is-company').addEventListener('change', function() {
+        invoiceForm.style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById('order-button').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (!validateTerms()) {
+            alert('{% trans "Please agree to the terms of service." %}');
+            return;
+        }
+
+        submitOrder();
+    });
+
+    // shipping
+    function updateShippingCostDisplay(selectedShippingCost) {
+        var shippingCostElement = document.getElementById('shipping-cost');
+        var totalCostElement = document.getElementById('total-cost');
+
+        if (selectedShippingCost !== undefined && !isNaN(selectedShippingCost)) {
+            shippingCostElement.textContent = `{% trans 'Shipping price:' %} ${selectedShippingCost.toFixed(2)}` + ' PLN';
+            var newTotal = parseFloat(total) + selectedShippingCost;
+            totalCostElement.textContent = `{% trans 'Total:' %} ${newTotal.toFixed(2)}` + ' PLN';
+        } else {
+            console.error('Invalid shipping cost:', selectedShippingCost);
+        }
+    }
+
+    fetchShippingLevels();
+    var confirmDeliveryMethodButton = document.getElementById('confirm-delivery-method');
+    confirmDeliveryMethodButton.addEventListener('click', function() {
+        var selectedMethodElement = document.querySelector('input[name="deliveryMethod"]:checked');
+        if (!selectedMethodElement) {
+            alert('Please select a delivery method.');
+            return;
+        }
+        
+        var selectedShippingCost = parseFloat(selectedMethodElement.dataset.shippingPrice);
+        updateShippingCostDisplay(selectedShippingCost);
+        $('#deliveryMethodModal').modal('hide');
+    });
+
+
+    function fetchShippingLevels() {
+        fetch('/get_shipping_prices/')
+        .then(response => response.json())
+        .then(data => {
+            calculateAndDisplayShippingCosts(data.shipping_levels);
+        });
+    }
+    function calculateAndDisplayShippingCosts(shippingLevels) {
+        const totalWeight = parseFloat('{{ order.get_cart_weight }}');
+        document.querySelectorAll('input[name="deliveryMethod"]').forEach(radioButton => {
+            radioButton.disabled = true;
+            radioButton.nextElementSibling.querySelector('span').textContent = '{% trans "Shipping method not available" %}';
+        });
+
+        shippingLevels.forEach(level => {
+            var radioButton = document.querySelector(`input[name="deliveryMethod"][value="${level.courier_name}"]`);
+            if (!radioButton) return;
+
+            if (totalWeight >= parseFloat(level.min_weight) && totalWeight <= parseFloat(level.max_weight)) {
+                var cost = parseFloat(level.cost);
+                if (!isNaN(cost)) {
+                    radioButton.disabled = false;
+                    radioButton.dataset.shippingPrice = cost;
+                    radioButton.nextElementSibling.querySelector('span').textContent = cost.toFixed(2) + ' PLN';
+                }
+            }
+        });
+    }
+
+    // invoice handling 
+    document.addEventListener('DOMContentLoaded', function() {
+
+        document.getElementById('same-address').addEventListener('change', function() {
+            if (this.checked) {
+                copyShippingToInvoice();
+            } else {
+                clearInvoiceFields();
+            }
+        });
+
+        function copyShippingToInvoice() {
+            document.querySelector('[name=invoice_address]').value = document.querySelector('[name=address]').value;
+            document.querySelector('[name=invoice_city]').value = document.querySelector('[name=city]').value;
+            document.querySelector('[name=invoice_postalcode]').value = document.querySelector('[name=postalcode]').value;
+            document.querySelector('[name=invoice_country]').value = document.querySelector('[name=country]').value;
+        }
+
+        function clearInvoiceFields() {
+            document.querySelector('[name=invoice_address]').value = '';
+            document.querySelector('[name=invoice_city]').value = '';
+            document.querySelector('[name=invoice_postalcode]').value = '';
+            document.querySelector('[name=invoice_country]').value = '';
+        }
+
+    });
+
+    // order processing
+    function clearCartCookie() {
+        var cart = {};
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+    }
+    
+    function submitOrder() {
+        if (total <= 0) {
+            alert("{% trans 'Your cart is empty. Add items to your cart before submitting an order.' %}");
+            return;
+        }
+
+        var userFormData = {
+            'first_name': document.querySelector('[name=first_name]').value,
+            'last_name': document.querySelector('[name=last_name]').value,
+            'email': document.querySelector('[name=email]').value,
+            'phone_number': document.querySelector('[name=phone_number]').value,
+        };
+
+        var shippingInfo = {
+            'address': document.querySelector('[name=address]').value,
+            'city': document.querySelector('[name=city]').value,
+            'postalcode': document.querySelector('[name=postalcode]').value,
+            'country': document.querySelector('[name=country]').value,
+        };
+
+        var invoiceInfo = {
+            'nip': document.querySelector('[name=nip]').value,
+            'firm': document.querySelector('[name=firm]').value,
+            'invoice_address': document.querySelector('[name=invoice_address]').value,
+            'invoice_city': document.querySelector('[name=invoice_city]').value,
+            'invoice_postalcode': document.querySelector('[name=invoice_postalcode]').value,
+            'invoice_country': document.querySelector('[name=invoice_country]').value,
+
+        };
+
+        console.log('Invoice info:', invoiceInfo)
+
+        var selectedMethodElement = document.querySelector('input[name="deliveryMethod"]:checked');
+        if (!selectedMethodElement) {
+            alert('Please select a delivery method.');
+            return;
+        }
+
+        var selectedDeliveryMethod = selectedMethodElement.value;
+        var selectedShippingCost = parseFloat(selectedMethodElement.dataset.shippingPrice);
+        var updatedTotal = parseFloat(total) + selectedShippingCost;
+
+        var orderData = {
+            'form': userFormData,
+            'shipping': shippingInfo,
+            'invoice': invoiceInfo,
+            'selected_shipping_method': selectedDeliveryMethod,
+            'selected_shipping_cost': selectedShippingCost,
+            'total': updatedTotal, 
+        };
+        var url = '/process_order/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            body: JSON.stringify(orderData),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                alert(data.message || 'An unknown error occurred.');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+
+
+</script>
+
+
+{% endblock content %}
+ 

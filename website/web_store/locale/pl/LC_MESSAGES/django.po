@@ -1,0 +1,818 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-30 15:29+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: store/forms.py:7 store/forms.py:38
+#: store/templates/store/User_profile_login_data.html:12
+msgid "First Name"
+msgstr "Imię"
+
+#: store/forms.py:8 store/forms.py:39
+#: store/templates/store/User_profile_login_data.html:13
+msgid "Last Name"
+msgstr "Nazwisko"
+
+#: store/forms.py:9 store/forms.py:34 store/forms.py:40
+#: store/templates/store/User_profile_login_data.html:14
+msgid "Email"
+msgstr "Email"
+
+#: store/forms.py:10 store/forms.py:41
+#: store/templates/store/User_profile_login_data.html:15
+msgid "Phone Number"
+msgstr "Numer telefonu"
+
+#: store/forms.py:11 store/forms.py:35
+#: store/templates/store/User_profile_login_data.html:18
+msgid "Password"
+msgstr "Hasło"
+
+#: store/forms.py:12
+msgid "Repeat Password"
+msgstr "Powtórz hasło"
+
+#: store/forms.py:19
+msgid "Password has to be at least 8 characters long."
+msgstr "Hasło musi zwierać co najmniej 8 znaków."
+
+#: store/forms.py:22
+msgid "Password has to contain at least 1 capital letter."
+msgstr "Hasło musi zwierać co najmniej jedną dużą literę."
+
+#: store/forms.py:25
+msgid "Password has to contain at least 1 small letter."
+msgstr "Hasło musi zawierać co najmniej jedną małą literę."
+
+#: store/forms.py:28
+msgid "Password has to contain at least 1 digit."
+msgstr "Hasło musi zwierać co najmniej jedną cyfrę."
+
+#: store/forms.py:44
+msgid "Message"
+msgstr "Wiadomość"
+
+#: store/models.py:48
+msgid "Product in stock."
+msgstr "Produkt dostępny"
+
+#: store/models.py:49
+msgid "Product not in stock"
+msgstr "Produkt niedostępny"
+
+#: store/models.py:54 store/views.py:22
+msgid "All"
+msgstr "Wszystko"
+
+#: store/models.py:55
+msgid "Ropes"
+msgstr "Liny"
+
+#: store/models.py:56
+msgid "Strings"
+msgstr "Sznurki"
+
+#: store/models.py:57
+msgid "Mansory Lines"
+msgstr "Sznurki murarskie"
+
+#: store/models.py:61
+msgid "Polypropylene"
+msgstr "Liny Polipropylenowe"
+
+#: store/models.py:61
+msgid "Yute"
+msgstr "Liny Jutowe"
+
+#: store/models.py:62
+msgid "Cotton"
+msgstr "Sznurki bawełniane"
+
+#: store/models.py:62
+msgid "Synthetic"
+msgstr "Sznurki syntetyczne"
+
+#: store/models.py:62
+msgid "Plastic"
+msgstr "Sznurki plastikowe"
+
+#: store/models.py:63
+msgid "Braided"
+msgstr "Plecione"
+
+#: store/models.py:63
+msgid "Twisted"
+msgstr "Skręcone"
+
+#: store/models.py:118
+msgid "Pending"
+msgstr "Oczekujące"
+
+#: store/models.py:119
+msgid "Shipped"
+msgstr "Wysłane"
+
+#: store/models.py:120
+msgid "Delivered"
+msgstr "Dostarczone"
+
+#: store/models.py:121
+msgid "Cancelled"
+msgstr "Anulowane"
+
+#: store/templates/store/About-us.html:29
+msgid "About Us"
+msgstr "O nas"
+
+#: store/templates/store/About-us.html:30
+msgid ""
+"Welcome, our company's tradition dates back to 1961. That is when we started "
+"producing jute ropes. Over time, the quality of our products and production "
+"capacity grew. Now we are proud of our high quality products, and the "
+"numerous possibilities of their personalization by customers, which allows "
+"us to perfectly adapt to the challenges we face.Our ropes are perfect for "
+"camping, sailing(polypropylene is waterproof and UV-light resistant), "
+"construction and interior decorating. Can be used for production of "
+"necklaces and bracelets. We are open to our customers' suggestions in order "
+"to maximize satisfaction of using our products."
+msgstr ""
+"Witamy, tradycja naszej firmy sięga 1961 roku. Wtedy to rozpoczęliśmy "
+"produkcję lin z juty. Z biegiem czasu jakość naszych produktów oraz "
+"możliwości produkcyjne wzrosły. Teraz jesteśmy dumni z naszych produktów "
+"wysokiej jakości oraz licznych możliwości ich personalizacji przez klientów, "
+"co pozwala nam idealnie dostosować się do stawianych przed nami wyzwań. "
+"Nasze liny są idealne do kempingu, żeglarstwa (polipropylen jest wodoodporny "
+"i odporny na promieniowanie UV), budownictwa i dekoracji wnętrz. Mogą być "
+"używane do produkcji naszyjników i bransoletek. Jesteśmy otwarci na sugestie "
+"naszych klientów, aby maksymalizować satysfakcję z używania naszych "
+"produktów."
+
+#: store/templates/store/About-us.html:42
+msgid "Contact Us"
+msgstr "Kontakt"
+
+#: store/templates/store/About-us.html:43 store/templates/store/Contact.html:19
+msgid ""
+"If you have any questions or need assistance, please feel free to contact us:"
+msgstr ""
+"Jeśli masz jakiekolwiek pytania lub potrzebujesz pomocy, prosimy o kontakt:"
+
+#: store/templates/store/About-us.html:46 store/templates/store/Contact.html:21
+msgid "Email: info@yourcompany.com"
+msgstr ""
+
+#: store/templates/store/About-us.html:47 store/templates/store/Contact.html:22
+msgid "Phone: +1 (123) 456-7890"
+msgstr ""
+
+#: store/templates/store/About-us.html:48 store/templates/store/Contact.html:23
+msgid "Address: 123 Main St, City, Country"
+msgstr ""
+
+#: store/templates/store/Account_delete_confirm.html:7
+msgid "Account Deletion Confirmation"
+msgstr "Potwierdzenie Usunięcia Konta"
+
+#: store/templates/store/Account_delete_confirm.html:9
+msgid "Dear User,"
+msgstr "Szanowny Użytkowniku,"
+
+#: store/templates/store/Account_delete_confirm.html:10
+msgid ""
+"We want to ensure you understand the implications of deleting your account. "
+"By confirming this action, the following data associated with your account "
+"will be permanently removed:"
+msgstr ""
+"Chcemy upewnić się, że rozumiesz konsekwencje usunięcia Twojego konta. "
+"Potwierdzając tę czynność, następujące dane powiązane z Twoim kontem zostaną "
+"trwale usunięte:"
+
+#: store/templates/store/Account_delete_confirm.html:12
+msgid "Personal Information:"
+msgstr "Informacje Osobiste:"
+
+#: store/templates/store/Account_delete_confirm.html:12
+msgid ""
+"Your profile details, including your name, email address, and phone number."
+msgstr ""
+"Szczegóły Twojego profilu, w tym imię i nazwisko, adres e-mail i numer "
+"telefonu."
+
+#: store/templates/store/Account_delete_confirm.html:13
+msgid "Shipping Addresses:"
+msgstr "Adresy Wysyłki:"
+
+#: store/templates/store/Account_delete_confirm.html:13
+msgid "All shipping addresses linked to your account."
+msgstr "Wszystkie adresy wysyłki powiązane z Twoim kontem."
+
+#: store/templates/store/Account_delete_confirm.html:14
+msgid "Invoice Information:"
+msgstr "Informacje o Fakturach:"
+
+#: store/templates/store/Account_delete_confirm.html:14
+msgid "Any invoice data."
+msgstr "Zapisane dane do faktur."
+
+#: store/templates/store/Account_delete_confirm.html:15
+msgid "Order History:"
+msgstr "Historia Zamówień:"
+
+#: store/templates/store/Account_delete_confirm.html:15
+msgid ""
+"All completed order records, including order items and related information."
+msgstr ""
+"Wszystkie zrealizowane rekordy zamówień, w tym przedmioty zamówienia i "
+"powiązane informacje."
+
+#: store/templates/store/Account_delete_confirm.html:16
+msgid "Contacts and Messages:"
+msgstr "Informacje kontaktowe i wiadomości:"
+
+#: store/templates/store/Account_delete_confirm.html:16
+msgid "All messages and contact information stored in our system."
+msgstr ""
+"Wszystkie wiadomości i informacje kontaktowe przechowywane w naszym systemie."
+
+#: store/templates/store/Account_delete_confirm.html:18
+msgid ""
+"Please note: While we will delete your personal order data, anonymized "
+"transactional data may be retained for legal and analytical purposes."
+msgstr ""
+"Uwaga: Chociaż usuniemy Twoje osobiste dane zamówienia, anonimowe dane "
+"transakcyjne mogą być zachowane do celów prawnych i analitycznych."
+
+#: store/templates/store/Account_delete_confirm.html:19
+msgid "Data Backup:"
+msgstr "Kopia zapasowa danych:"
+
+#: store/templates/store/Account_delete_confirm.html:19
+msgid ""
+"We recommend you back up any information you might need before proceeding "
+"with this action. This action is irreversible. Once your account is deleted, "
+"you will not be able to recover any of this data."
+msgstr ""
+"Zalecamy wykonanie kopii zapasowej wszelkich informacji, które mogą być "
+"potrzebne przed przystąpieniem do tej czynności. Ta akcja jest "
+"nieodwracalna. Po usunięciu konta nie będzie możliwości odzyskania tych "
+"danych."
+
+#: store/templates/store/Account_delete_confirm.html:24
+msgid ""
+"I understand the consequences of deleting my account and I confirm that I "
+"want to proceed."
+msgstr ""
+"Rozumiem konsekwencje usunięcia mojego konta i potwierdzam, że chcę "
+"kontynuować."
+
+#: store/templates/store/Account_delete_confirm.html:29
+#: store/templates/store/User_profile_login_data.html:23
+#: store/templates/store/User_profile_login_data.html:24
+msgid "Delete account"
+msgstr "Usuń konto"
+
+#: store/templates/store/Account_delete_confirm.html:57
+msgid ""
+"Are you sure you want to delete your account? This action cannot be undone."
+msgstr ""
+"Jesteś pewny, że chcesz usunąć swoje konto? Ta czynność będzie nieodwracalna."
+
+#: store/templates/store/Account_delete_confirm.html:82
+msgid "An error occurred while deleting your account. Please try again later."
+msgstr "Podczas usuwania Twoje konta wystąpił błąd. Spróbuj ponownie później."
+
+#: store/templates/store/Cart.html:14
+#: store/templates/store/User_profile_order_page.html:32
+msgid "Item"
+msgstr "Przedmiot #"
+
+#: store/templates/store/Cart.html:15
+#: store/templates/store/User_profile_order_page.html:33
+msgid "Price"
+msgstr "Cena"
+
+#: store/templates/store/Cart.html:16
+#: store/templates/store/User_profile_order_page.html:34
+msgid "Quantity"
+msgstr "Ilość"
+
+#: store/templates/store/Cart.html:17
+#: store/templates/store/User_profile_order_page.html:35
+#: store/templates/store/User_profile_orders.html:13
+msgid "Total Price"
+msgstr "Cena całkowita"
+
+#: store/templates/store/Cart.html:39
+#: store/templates/store/User_profile_order_page.html:53
+msgid "Total: "
+msgstr "Kwota całkowita: "
+
+#: store/templates/store/Cart.html:46
+msgid "Checkout"
+msgstr "Finalizacja zamówienia"
+
+#: store/templates/store/Catalog.html:8
+msgid "Discover More with Our Extended Catalog"
+msgstr "Odkryj więcej produktów z naszą rozszerzoną ofertą."
+
+#: store/templates/store/Catalog.html:9
+msgid ""
+"While our store showcases a curated selection of products, our catalog opens "
+"up a world of possibilities. Dive into our extensive range where we craft "
+"each item with care, ensuring quality and uniqueness. Whether you're looking "
+"for something specific or browsing for inspiration, our catalog is designed "
+"to cater to your every need, with even more options to choose from."
+msgstr ""
+"Podczas gdy nasz sklep prezentuje starannie wyselekcjonowany asortyment "
+"produktów, nasza oferta otwiera świat możliwości. Zanurz się w naszej "
+"obszernej ofercie, gdzie każdy przedmiot jest tworzony z dbałością, "
+"zapewniając jakość i unikalność. Niezależnie od tego, czy szukasz czegoś "
+"konkretnego, czy przeglądasz oferty w poszukiwaniu inspiracji, nasz katalog "
+"jest zaprojektowany tak, aby sprostać każdej Twojej potrzebie, oferując "
+"jeszcze więcej opcji do wyboru."
+
+#: store/templates/store/Checkout.html:13
+msgid "First name..."
+msgstr "Imię..."
+
+#: store/templates/store/Checkout.html:16
+msgid "Last name..."
+msgstr "Nazwisko..."
+
+#: store/templates/store/Checkout.html:19
+msgid "Email..."
+msgstr "Email..."
+
+#: store/templates/store/Checkout.html:22
+msgid "Phone number..."
+msgstr "Numer telefonu..."
+
+#: store/templates/store/Checkout.html:27
+msgid "Shipping information"
+msgstr "Dane do wysyłki"
+
+#: store/templates/store/Checkout.html:30
+#: store/templates/store/Checkout.html:61
+msgid "Address..."
+msgstr "Adres..."
+
+#: store/templates/store/Checkout.html:33
+#: store/templates/store/Checkout.html:64
+msgid "City..."
+msgstr "Miejscowość..."
+
+#: store/templates/store/Checkout.html:36
+#: store/templates/store/Checkout.html:67
+msgid "Postal-code..."
+msgstr "Kod pocztowy..."
+
+#: store/templates/store/Checkout.html:40
+#: store/templates/store/Checkout.html:71
+msgid "Select Country..."
+msgstr "Wybierz kraj..."
+
+#: store/templates/store/Checkout.html:51
+msgid "I am a company"
+msgstr "Jestem firmą"
+
+#: store/templates/store/Checkout.html:55
+msgid "Firm..."
+msgstr "Firma..."
+
+#: store/templates/store/Checkout.html:58
+msgid "Tax identification number..."
+msgstr "NIP..."
+
+#: store/templates/store/Checkout.html:81
+msgid "Use shipping address as invoice address"
+msgstr "Adres wysyłki taki sam jak adres do faktury."
+
+#: store/templates/store/Checkout.html:88
+msgid "I have read and agree to the"
+msgstr "Przeczytałem i zapoznałem się z "
+
+#: store/templates/store/Checkout.html:88
+msgctxt "checkout"
+msgid "Terms of Service"
+msgstr "regulaminem"
+
+#: store/templates/store/Checkout.html:91
+msgid "Select Delivery Method"
+msgstr "Wybierz metodę wysyłki"
+
+#: store/templates/store/Checkout.html:94
+msgid "Place Order"
+msgstr "Złóż zamówienie"
+
+#: store/templates/store/Checkout.html:100
+msgid "Back to cart"
+msgstr "Wróć do koszyka"
+
+#: store/templates/store/Checkout.html:102
+msgid "Order Summary"
+msgstr "Podsumowanie zamówienia"
+
+#: store/templates/store/Checkout.html:106
+msgid "Product Image"
+msgstr "Produkt niedostępny"
+
+#: store/templates/store/Checkout.html:110
+msgid "Items:"
+msgstr "Produkty:"
+
+#: store/templates/store/Checkout.html:111
+msgid "Total Weight:"
+msgstr "Waga całkowita: "
+
+#: store/templates/store/Checkout.html:112
+#: store/templates/store/Checkout.html:207
+msgid "Shipping price:"
+msgstr "Kwota wysyłki:"
+
+#: store/templates/store/Checkout.html:113
+#: store/templates/store/Checkout.html:209
+
+msgid "Total:"
+msgstr "Kwota całkowita: "
+
+#: store/templates/store/Checkout.html:122
+msgid "Choose Delivery Method"
+msgstr "Wybierz metodę wysyłki"
+
+#: store/templates/store/Checkout.html:145
+#: store/templates/store/Checkout.html:147
+msgid "Self pickup"
+msgstr "Odbiór osobisty"
+
+#: store/templates/store/Checkout.html:153
+msgid "Confirm"
+msgstr "Potwierdź"
+
+#: store/templates/store/Checkout.html:193
+msgid "Please agree to the terms of service."
+msgstr "Proszę potwierdzić znajomość regulaminu."
+
+#: store/templates/store/Checkout.html:290
+msgid "Your cart is empty. Add items to your cart before submitting an order."
+msgstr ""
+"Twój koszyk jest pusty. Dodaj produkty do koszyka przed złożeniem zamówienia."
+
+#: store/templates/store/Contact.html:6
+msgid "Form"
+msgstr "Formularz"
+
+#: store/templates/store/Contact.html:15
+msgid "Submit"
+msgstr "Potwierdź"
+
+#: store/templates/store/Login.html:8
+msgid "Sign in"
+msgstr "Zaloguj się"
+
+#: store/templates/store/Login.html:23 store/templates/store/Main.html:140
+msgid "Login"
+msgstr "Zaloguj się"
+
+#: store/templates/store/Main.html:108
+msgid "Language"
+msgstr "Język"
+
+#: store/templates/store/Main.html:109 web_store/settings.py:122
+msgid "English"
+msgstr "Angielski"
+
+#: store/templates/store/Main.html:110 web_store/settings.py:123
+msgid "Polish"
+msgstr "Polski"
+
+#: store/templates/store/Main.html:125
+msgid "Store"
+msgstr "Sklep"
+
+#: store/templates/store/Main.html:128
+msgid "Catalog"
+msgstr "Oferta"
+
+#: store/templates/store/Main.html:131
+msgid "About us"
+msgstr "O nas"
+
+#: store/templates/store/Main.html:137
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: store/templates/store/Main.html:161
+msgid "Contact Info"
+msgstr "Informacje kontaktowe"
+
+#: store/templates/store/Main.html:163
+#, fuzzy
+#| msgid "Phone Number"
+msgid "Phone number"
+msgstr "Numer telefonu"
+
+#: store/templates/store/Main.html:167
+msgid "Quick Links"
+msgstr "Szybki Dostęp"
+
+#: store/templates/store/Main.html:169
+msgid "Contact From"
+msgstr "Formularz konaktowy"
+
+#: store/templates/store/Main.html:170
+msgctxt "main"
+msgid "Terms of Service"
+msgstr "Regulamin i polityka prywatności"
+
+#: store/templates/store/Main.html:174
+msgid "Cookie Policy"
+msgstr "Polityka cookie"
+
+#: store/templates/store/Main.html:175
+msgid "Cookie Settings"
+msgstr "Ustawienia plików cookie"
+
+#: store/templates/store/Main.html:179
+msgid "2023 Your Company Name. All rights reserved."
+msgstr ""
+
+#: store/templates/store/Main.html:190
+msgid ""
+"This website uses cookies to ensure you get the best experience on our "
+"website."
+msgstr ""
+
+#: store/templates/store/Main.html:191
+msgid "Accept"
+msgstr "Zgadzam się"
+
+#: store/templates/store/Main.html:192
+msgid "Disagree"
+msgstr "Nie zgadzam się"
+
+#: store/templates/store/Password_change.html:9
+msgid "Input new password"
+msgstr "Wpisz nowe hasło"
+
+#: store/templates/store/Password_reset.html:10
+msgid "Email address"
+msgstr "Adres email"
+
+#: store/templates/store/Password_reset.html:15
+#: store/templates/store/Password_reset_confirm.html:9
+#: store/templates/store/Password_reset_confirm.html:31
+msgid "Reset Password"
+msgstr "Powtórz hasło"
+
+#: store/templates/store/Password_reset_confirm.html:15
+msgid "New password"
+msgstr "Nowe hasło"
+
+#: store/templates/store/Password_reset_confirm.html:20
+msgid "Confirm new password"
+msgstr "Powtórz nowe hasło"
+
+#: store/templates/store/Password_reset_confirm.html:25
+msgid "Your password can't be too similar to your other personal information."
+msgstr "Twoje hasło nie może być zbyt podobne do Twoich danych osobowych."
+
+#: store/templates/store/Password_reset_confirm.html:26
+msgid "Your password must contain at least 8 characters."
+msgstr "Hasło musi zwierać co najmniej jedną dużą literę."
+
+#: store/templates/store/Password_reset_confirm.html:27
+msgid "Your password can't be a commonly used password."
+msgstr "Twoje hasło nie może być powszechne."
+
+#: store/templates/store/Password_reset_confirm.html:28
+msgid "Your password can't be entirely numeric."
+msgstr "Twoje hasło nie może składać się wyłącznie z cyfr."
+
+#: store/templates/store/Product.html:14
+msgid "Select Length"
+msgstr "Wybierz długość produktu"
+
+#: store/templates/store/Product.html:27
+msgid "Unavailable"
+msgstr "Produkt niedostępny"
+
+#: store/templates/store/Product.html:29
+msgid "Add to Cart"
+msgstr "Dodaj do koszyka"
+
+#: store/templates/store/Product.html:34
+msgid "Product information:"
+msgstr "Specyfikacja produktu:"
+
+#: store/templates/store/Product.html:38
+msgid "Length"
+msgstr "Długość"
+
+#: store/templates/store/Product.html:39
+msgid "m"
+msgstr "m"
+
+#: store/templates/store/Product.html:42
+msgid "Diameter"
+msgstr "Średnica"
+
+#: store/templates/store/Product.html:43
+msgid "mm"
+msgstr "mm"
+
+#: store/templates/store/Product.html:46
+msgid "Material"
+msgstr "Materiał"
+
+#: store/templates/store/Product.html:50
+msgid "Color"
+msgstr "Kolor"
+
+#: store/templates/store/Product.html:54
+msgid "Weight"
+msgstr "Waga"
+
+#: store/templates/store/Product.html:55
+msgid "g"
+msgstr "g"
+
+#: store/templates/store/Product.html:58
+msgid "Status"
+msgstr "Status zamówienia"
+
+#: store/templates/store/Product.html:66
+msgid "Product Description:"
+msgstr "Opis produktu"
+
+#: store/templates/store/Register.html:8
+msgid "Create account"
+msgstr "Masz już konto?"
+
+#: store/templates/store/Register.html:43
+msgid "Register"
+msgstr "Rejestracja"
+
+#: store/templates/store/Register.html:45
+msgid "Already have an account?"
+msgstr "Masz już konto?"
+
+#: store/templates/store/Register.html:45
+msgid "Get back to login"
+msgstr "Wróć do logowania"
+
+#: store/templates/store/Store.html:9
+msgid "Menu"
+msgstr "Menu"
+
+#: store/templates/store/Store.html:30
+msgid "Home"
+msgstr "Strona główna"
+
+#: store/templates/store/Store.html:37
+msgid "All Products"
+msgstr "Wszystkie produkty: "
+
+#: store/templates/store/Store.html:47
+msgid "View"
+msgstr "Strona produktu"
+
+#: store/templates/store/User_profile.html:7
+msgid "My account"
+msgstr "Moje konto"
+
+#: store/templates/store/User_profile.html:11
+msgid "Orders"
+msgstr "Zamówienia"
+
+#: store/templates/store/User_profile.html:14
+msgid "Addresses"
+msgstr "Adres"
+
+#: store/templates/store/User_profile.html:17
+msgid "Login Data"
+msgstr "Logowanie"
+
+#: store/templates/store/User_profile_addresses.html:10
+msgid "Shipping Address"
+msgstr "Adres Odbiorcy #"
+
+#: store/templates/store/User_profile_login_data.html:11
+msgid "User Profile Data"
+msgstr "Dane użytkownika"
+
+#: store/templates/store/User_profile_login_data.html:19
+msgid "Change Password"
+msgstr "Hasło"
+
+#: store/templates/store/User_profile_order_page.html:9
+msgid "Order data: "
+msgstr "Dane zamówienia"
+
+#: store/templates/store/User_profile_order_page.html:10
+#, fuzzy
+#| msgid "Order #"
+msgid "Order id: "
+msgstr "Numer zamówienia"
+
+#: store/templates/store/User_profile_order_page.html:11
+msgid "Order date: "
+msgstr "Data "
+
+#: store/templates/store/User_profile_order_page.html:15
+msgid "Customer: "
+msgstr "Klient"
+
+#: store/templates/store/User_profile_order_page.html:16
+msgid "Name: "
+msgstr "Imię"
+
+#: store/templates/store/User_profile_order_page.html:21
+msgid "Shipping address:"
+msgstr "Adres do wysyłki"
+
+#: store/templates/store/User_profile_order_page.html:22
+msgid "Street: "
+msgstr "Ulica"
+
+#: store/templates/store/User_profile_order_page.html:23
+msgid "City: "
+msgstr "Miejscowość"
+
+#: store/templates/store/User_profile_order_page.html:24
+msgid "Postal code: "
+msgstr "Kod pocztowy"
+
+#: store/templates/store/User_profile_order_page.html:25
+msgid "Country: "
+msgstr "Kraj"
+
+#: store/templates/store/User_profile_orders.html:11
+msgid "Order"
+msgstr "Zamówienie"
+
+#: store/templates/store/User_profile_orders.html:12
+msgid "Date"
+msgstr "Data"
+
+#: store/templates/store/User_profile_orders.html:29
+msgid "See Details"
+msgstr "Zobacz szczegóły"
+
+#: store/views.py:135
+msgid "Invalid request method"
+msgstr "Błąd metody; request"
+
+#: store/views.py:343
+msgid "Invalid login credentials."
+msgstr "Nieprawidłowe dane logowania"
+
+#~ msgid "Available"
+#~ msgstr "Dostępne"
+
+#~ msgid "Rope"
+#~ msgstr "Liny"
+
+#~ msgid "None"
+#~ msgstr "Brak"
+
+#~ msgid "Blended"
+#~ msgstr "Mieszane"
+
+#~ msgid "Nylon"
+#~ msgstr "Nylon"
+
+#~ msgid "Lines and yarns"
+#~ msgstr "Sznurki"
+
+#~ msgid "Item #"
+#~ msgstr "Przedmiot #"
+
+#~ msgid "Payment options"
+#~ msgstr "Opcje płatnośći"
+
+#~ msgid "Make payment"
+#~ msgstr "Zapłać"
+
+#~ msgid "Payment submitted..."
+#~ msgstr "Płatność zatwierdzona..."
+
+#, python-brace-format
+#~ msgid "Error: '{form.fields[field].label}': {error}"
+#~ msgstr "Błąd: '{form.fields[field].label}': {error}"

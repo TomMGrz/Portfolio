@@ -1,0 +1,22 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <div class="profile-wrapper"> 
+        <div class="profile">
+            <div class="box">
+                <h1>{% trans 'My account' %}</h1>
+                <a class="btn btn-outline-dark" href="{% url 'user_profile_orders' %}">{% trans 'Orders' %}</a>
+            </div>
+            <div class="box">
+                <a class="btn btn-outline-dark" href="{% url 'user_profile_addresses' %}">{% trans 'Addresses' %}</a>
+            </div>
+            <div class="box">
+                <a class="btn btn-outline-dark" href="{% url 'user_profile_login_data' %}">{% trans 'Login Data' %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}" width="400" height="400">
+            </div>
+            <div class="col-lg-6">
+                <h1>{{ product.name }} {{ product.color }}</h1>
+                <div class="price">
+                    <span class="amount"><strong>{% trans 'Price' %}: {{ product.price }} PLN</strong></span>
+                </div>
+                <hr>
+                <div class="length-select">
+                    <p><strong>{% trans "Select Length" %}:</strong></p>
+                    <div class="length-buttons">
+                        {% for variant in product_variant %}
+                            <a class="btn btn-outline-success" href="{% url 'product' product.name product.color variant.length product.subcategory %}">{{ variant.length }} m</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if product.status == "Unavailable" %}
+                    <button class="btn btn-danger" disabled>{% trans "Unavailable" %}</button>
+                {% else %}
+                    <button data-product="{{ product.id }}" data-action="add" class="btn btn-success add-btn update-cart">{% trans "Add to Cart" %}</button>
+                {% endif %}
+                <hr>
+                <div class="col-lg-6">
+                    <div class="product-details">
+                        <p><strong>{% trans "Product information:" %} </strong></p>
+                        <table class="product-table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>{% trans 'Length' %}:</strong></td>
+                                    <td>{{ product.length }} {% trans 'm' %}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{% trans 'Diameter' %}:</strong></td>
+                                    <td>{{ product.diameter }} {% trans 'mm' %}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{% trans 'Material' %}:</strong></td>
+                                    <td>{{ product.material }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{% trans 'Color' %}:</strong></td>
+                                    <td>{{ product.color }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{% trans 'Weight' %}:</strong></td>
+                                    <td>{{ product.weight }} kg</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{% trans 'Status' %}:</strong></td>
+                                    <td>{{ product.status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>   
+            </div>
+            <p><strong>{% trans "Product Description:" %} </strong></p>
+            <div class="description-box">
+                <p class="description">{{ product.description }}</p>
+            </div>
+            <hr>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script> 
+    let map;
+    function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 50.389383, lng: 19.595185 },
+        zoom: 15,
+    });
+        const marker = new google.maps.Marker({
+            position: { lat: 50.389383, lng: 19.595185},
+            map: map,
+        })
+    }
+    
+    initMap();
+
+
+
+</script>
+
+
+<div class="company-info">
+    <h2>{% trans "About Us" %}</h2>
+    <p>{% trans "Welcome, our company's tradition dates back to 1961. That is when we started producing jute ropes. Over time, the quality of our products and production capacity grew. Now we are proud of our high quality products, and the numerous possibilities of their personalization by customers, which allows us to perfectly adapt to the challenges we face.Our ropes are perfect for camping, sailing(polypropylene is waterproof and UV-light resistant), construction and interior decorating. Can be used for production of necklaces and bracelets. We are open to our customers' suggestions in order to maximize satisfaction of using our products." %}</p>
+
+        <div class="linkholder">
+            <div class="mapholder">
+                <div id="map"></div>
+                <script async
+                src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"></script>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'site/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <br>
+    <br>
+    <div class="row justify-content-center text-center">
+        {% for code, name in categories %}
+        <div class="col-xl-3">
+            <a href="{% url 'portfolio_by_category' code %}" class="category-btn">
+                {{ name }}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row justify-content-center text-center">
+        {% for item in portfolio_objects %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="box">
+                <h6><strong>{{ item.name }}</strong></h6>
+                <br>
+                <img src="{{ item.image.url }}" class="img-fluid" data-bs-toggle="modal"
+                    data-bs-target="#modal{{ forloop.counter }}">
+                <div class="modal fade" id="modal{{ forloop.counter }}" tabindex="-1"
+                    aria-labelledby="modalLabel{{ forloop.counter }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel{{ forloop.counter }}">{{ item.name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex justify-content-center zoom-effect-container">
+                                <img src="{{ item.image.url }}" class="img-fluid zoom-image"
+                                    id="img{{ forloop.counter }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.zoom-image').forEach(img => {
+            img.addEventListener('click', function (e) {
+                const { left, top, width, height } = e.target.getBoundingClientRect();
+                const x = (e.clientX - left) / width * 100;
+                const y = (e.clientY - top) / height * 100;
+
+                if (e.target.style.transform) {
+                    e.target.style.transform = '';
+                    e.target.style.cursor = 'zoom-in';
+                } else {
+                    e.target.style.transformOrigin = `${x}% ${y}%`;
+                    e.target.style.transform = 'scale(2)';
+                    e.target.style.cursor = 'zoom-out';
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+    <div class='back-to-profile'>
+        <a class="btn btn-outline-dark" href="{% url 'user_profile' %}">Back</a>
+        <p><strong>{% trans 'Confirmed Orders' %}</strong></p>
+        {% for order in confirmed_orders %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">{% trans "Order" %}</th>
+                    <th scope="col">{% trans "Date" %}</th>
+                    <th scope="col">{% trans "Total Price" %}</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p>{{ order.order_id }}</p>
+                    </td>
+                    <td>
+                        <p>{{ order.order_date }}</p>
+                    </td>
+                    <td>
+                        <strong>{{ order.full_price|floatformat:2 }} PLN</strong>
+                    </td>
+                    <td>
+                        <a class="btn" href="{% url 'user_profile_order_page' order.order_id %}">{% trans 'See Details' %}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+        <p><strong>{% trans 'Completed Orders' %}</strong></p>
+        {% for completed_order in completed_orders %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">{% trans "Order" %}</th>
+                    <th scope="col">{% trans "Date" %}</th>
+                    <th scope="col">{% trans "Total Price" %}</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <p>{{completed_order.order_id }}</p>
+                    </td>
+                    <td>
+                        <p>{{ completed_order.order_date }}</p>
+                    </td>
+                    <td>
+                        <strong>{{ completed_order.full_price|floatformat:2 }}PLN</strong>
+                    </td>
+                    <td>
+                        <a class="btn" href="{% url 'user_profile_order_page' completed_order.order_id %}">{% trans 'See Details' %}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}

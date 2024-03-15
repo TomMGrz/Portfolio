@@ -1,0 +1,204 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>website</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+
+    <script type="text/javascript">
+      var user = '{{ request.user }}'; 
+    
+      function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken');
+      console.log('CSRFTOKEN: ', csrftoken);
+
+      function getCookie(name){
+        var cookieArr = document.cookie.split(";");
+        for (var i = 0; i < cookieArr.length; i++){
+          var cookiePair = cookieArr[i].split("=");
+
+          if(name == cookiePair[0].trim()){
+            return decodeURIComponent(cookiePair[1]);
+          }
+        }
+        return null;
+      }
+      
+      var cart = JSON.parse(getCookie('cart'));
+      if (!cart) {
+        cart = {};
+        console.log('Cart created.')
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path/"
+        location.reload();
+      }
+      console.log('Cart: ', cart)
+
+      function setCookie(name, value, maxAgeInSeconds) {
+          var date = new Date();
+          date.setTime(date.getTime() + (maxAgeInSeconds * 1000));
+          var expires = "expires=" + date.toUTCString();
+          document.cookie = name + "=" + value + ";" + expires + ";path=/";
+      }
+
+      var languagePreference = getCookie('django_language');
+
+
+      function setLanguagePreference(languageCode) {
+          var supportedLanguages = ['en', 'pl'];
+          if (supportedLanguages.includes(languageCode)) {
+              setCookie('django_language', languageCode, 365 * 24 * 60 * 60);
+              console.log('Language preference set to', languageCode);
+          }
+      }
+
+      if (languagePreference) {
+          setLanguagePreference(languagePreference);
+      }
+
+
+      document.addEventListener("DOMContentLoaded", function() {
+      var consent = getCookie("cookieConsent");
+      if (!consent) {
+          document.getElementById("cookieConsentBanner").style.display = "block";
+      }
+
+      document.getElementById("acceptCookieConsent").onclick = function() {
+          setCookie("cookieConsent", "true", 365 * 24 * 60 * 60); // 1 year
+          document.getElementById("cookieConsentBanner").style.display = "none";
+      };
+
+      document.getElementById("declineCookieConsent").onclick = function() {
+          setCookie("cookieConsent", "false", 365 * 24 * 60 * 60); // 1 year
+          document.getElementById("cookieConsentBanner").style.display = "none";
+          // Implement additional actions for when cookies are declined
+      };
+
+      document.getElementById("showCookieBanner").onclick = function() {
+          document.getElementById("cookieConsentBanner").style.display = "block";
+      };
+});
+
+    </script>
+
+
+</head>
+<body>
+  <div class="language-bar">
+    <div class="language-switcher">
+      <span class="language-label">{% trans 'Language' %}:</span>
+      <a href="{% url 'set_language' 'en' %}">{% trans 'English' %}</a>
+      <a href="{% url 'set_language' 'pl' %}">{% trans 'Polish' %}</a>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'store' %}">
+            <img src="{% static 'images/logo3.svg' %}" alt="Logo" width="260 px" height="80 px"> 
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link nav-button" aria-current="page" href="{% url 'store' %}">{% trans 'Store' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-button" aria-current="page" href="{% url 'catalog' %}">{% trans 'Catalog' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-button" aria-current="page" href="{% url 'about_us' %}">{% trans 'About us' %}</a>
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+              {% if user.is_authenticated %}
+              <a href="{% url 'logout' %}" class="btn nav-button">
+                {% trans 'Logout' %}</a>
+              <a href="{% url 'user_profile' %}" class="btn nav-button">{% trans 'Profile' %}</a>
+              {% else %}
+              <a href="{% url 'login' %}" class="btn nav-button" id="show-login">{% trans 'Login' %}</a>
+              {% endif %}
+            </div>
+            <div class="form-inline my-2 my-lg-0">
+              <a href="{% url 'cart' %}">
+                <img id="cart-icon" src="{% static 'images/cart.png' %}">
+                <div id="cart-total" class="cart-count">{{ cart_items }}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+      <div class="container">
+          {% block content %}
+          {% endblock %}
+      </div>
+
+      <footer class="footer mt-auto py-3">
+        <div class="row">
+            <div class="col-md-4 footer-contact">
+                <h3>{% trans 'Contact Info' %}</h3>
+                <p>Email: liny.sznurygrzanka@gmail.com</p>
+                <p>{% trans 'Phone number' %}: +48 606 711 757</p>
+                <p>{% trans 'Address' %}: Sportowa 8, Kwaśniów Górny 32-310</p>
+            </div>
+            <div class="col-md-4 footer-links">
+                <h3>{% trans 'Quick Links' %}</h3>
+                <ul>
+                    <li><a href="{% url 'terms_of_service' %}">{% trans "Terms of Service and Privacy Policy" context "main" %}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 footer-cookie">
+                <h3>{% trans 'Cookie Policy' %}</h3>
+                <button class="nav-link cookie-settings-btn" id="showCookieBanner">{% trans 'Cookie Settings' %}</button>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; {% trans '2023 Sławomir Grzanka. All rights reserved.' %}</p>
+        </div>
+    </footer>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
+
+<div id="cookieConsentBanner" class="cookie-consent-banner">
+  <p>
+      {% trans 'Welcome to Liny-Sznury! We use cookies to facilitate the use of our online store and ensure smooth processing of your orders. Cookies also allow us to save your data for future orders for your convenience. We care about your privacy and use data only for purposes related to order fulfillment. You can manage your cookie settings by choosing "Accept", you agree to the use of cookies in accordance with our Privacy Policy.' %}
+  </p>
+  <button id="acceptCookieConsent">
+      {% trans 'Accept' %}
+  </button>
+  <hr>
+  <button id="declineCookieConsent">
+      {% trans 'Disagree' %}
+  </button>
+</div>
+
+
+</body>
+
+
+</html>

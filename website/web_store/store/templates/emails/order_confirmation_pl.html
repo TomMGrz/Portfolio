@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Potwierdzenie zamówienia</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f6f6f6; font-family: Arial, sans-serif;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; margin-top: 15px;">
+        <tr>
+            <td align="center" bgcolor="#044f99" style="padding: 40px 0;">
+                <img src="http://placehold.it/200x50/044f99/ffffff?text=LOGO" alt="Logo firmy" width="200" height="50" style="display: block;">
+            </td>
+        </tr>
+
+        <tr>
+            <td bgcolor="#ffffff" style="padding: 40px 30px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="border-bottom: 2px solid #eeeeee; padding-bottom: 10px;">
+                            <h1 style="color: #333333; font-size: 24px; margin: 0;">Potwierdzenie zamówienia</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 20px 0 30px 0;">
+                            <p style="margin: 0;">Szanowny(a) {{ customer.first_name }} {{ customer.last_name }}</p>
+                            <p style="margin: 0;">Twoje zamówienie o numerze referencyjnym: {{ order.order_id }} zostało potwierdzone.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 20px;">
+                            <h2 style="color: #333333; font-size: 20px; margin: 0; padding-bottom: 5px;">Szczegóły zamówienia:</h2>
+                            {% for orderItem in orderItems %}
+                            <p style="margin: 0;">Produkt: {{ orderItem.product.name }} {{ orderItem.product.color }} {{ orderItem.product.length }}m</p>
+                            <p style="margin: 0;">Ilość: {{ orderItem.quantity }}</p>
+                            <p style="margin: 0;">Cena: {{ orderItem.product.price }}</p>
+                            {% endfor %}
+                            <p style="margin: 0;">Łączna cena: {{ order.full_price }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 20px; border-top: 2px solid #eeeeee;">
+                            <h2 style="color: #333333; font-size: 20px; margin: 0; padding-bottom: 5px;">Szczegóły wysyłki:</h2>
+                            <p style="margin: 0;">Imię i nazwisko: {{ customer.first_name }} {{ customer.last_name }}</p>
+                            <p style="margin: 0;">Email: {{ customer.email }}</p>
+                            <p style="margin: 0;">Numer telefonu: {{ customer.phone_number }}</p>
+                            <p style="margin: 0;">Koszt wysyłki: {{ order.shipping_cost }}</p>
+                            <p style="margin: 0;">Metoda dostawy: {{ order.delivery_method }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 30px;">
+                            <p style="margin: 0;">Średni czas realizacji zamówienia to 1-2 dni.</p>
+                            <p style="margin: 0;">Dziękujemy za zakupy u nas!</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td bgcolor="#044f99" style="padding: 30px 30px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td style="color: #ffffff; font-size: 14px; text-align: center;">
+                            &copy; 2024 Sławomir Grzanka. Wszelkie prawa zastrzeżone.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

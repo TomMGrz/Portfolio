@@ -1,0 +1,18 @@
+{% extends 'site/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <br>
+    <br>
+    <div class="row justify-content-center text-center">
+        <div class="contact-text">
+            <h2><strong>Dane do kontaktu: </strong></h2>
+            <br>
+            <p>Email: {{ contact_obj.email }}</p>
+            <p>Numer telefonu: {{ contact_obj.phone_number }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

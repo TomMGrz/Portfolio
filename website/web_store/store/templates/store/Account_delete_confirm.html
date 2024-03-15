@@ -1,0 +1,78 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="box" style="text-align: center;">
+        <h2 style="margin-bottom: 20px;">{% trans "Account Deletion Confirmation" %}</h2>
+        <div class="warning-message">
+            <p>{% trans "Dear User," %}</p>
+            <p>{% trans "We want to ensure you understand the implications of deleting your account. By confirming this action, the following data associated with your account will be permanently removed:" %}</p>
+            <ul style="text-align: left; display: inline-block; text-align: justify;">
+                <li><strong>{% trans "Personal Information:" %}</strong> {% trans "Your profile details, including your name, email address, and phone number." %}</li>
+                <li><strong>{% trans "Shipping Addresses:" %}</strong> {% trans "All shipping addresses linked to your account." %}</li>
+                <li><strong>{% trans "Invoice Information:" %}</strong> {% trans "Any invoice data." %}</li>
+                <li><strong>{% trans "Order History:" %}</strong> {% trans "All completed order records, including order items and related information." %}</li>
+            </ul>
+            <p>{% trans "Please note: While we will delete your personal order data, anonymized transactional data may be retained for legal and analytical purposes." %}</p>
+            <p><strong>{% trans "Data Backup:" %}</strong> {% trans "We recommend you back up any information you might need before proceeding with this action. This action is irreversible. Once your account is deleted, you will not be able to recover any of this data." %}</p>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+            <input class="form-check-input" type="checkbox" id="confirm-deletion-checkbox" name="confirm-deletion">
+            <label for="confirm-deletion-checkbox" class="form-check-label">
+                {% trans "I understand the consequences of deleting my account and I confirm that I want to proceed." %}
+            </label>
+        </div>
+
+        <div class="delete-button" style="margin-top: 10px;">
+            <button class="btn btn-primary" id="delete-account-btn" data-url="{% url 'delete_account' %}">{% trans "Delete account" %}</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#confirm-deletion-checkbox').change(function() {
+            if (this.checked) {
+                $('#delete-account-btn').removeAttr('disabled').removeClass('btn-disabled');
+            } else {
+                $('#delete-account-btn').attr('disabled', 'disabled').addClass('btn-disabled');
+            }
+        });
+
+        $("#delete-account-btn").click(function() {
+            if ($(this).is(':disabled')) {
+                return false;
+            }
+            
+            if (!confirm("{% trans 'Are you sure you want to delete your account? This action cannot be undone.' %}")) {
+                return false;
+            }
+
+            var url = $(this).data("url");
+            var csrftoken = getToken('csrftoken');
+            
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                },
+                success: function(data) {
+                    if (data.success) {
+                        window.location.href = "{% url 'store' %}";
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert("{% trans 'An error occurred while deleting your account. Please try again later.' %}");
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

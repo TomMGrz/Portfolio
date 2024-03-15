@@ -1,0 +1,75 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="container">
+    <div class="back-to-profile">
+        <a class="btn btn-outline-dark" href="{% url 'user_profile' %}">Back</a>
+    </div>
+    <div class="content-wrapper">
+        <div class="box">
+            <div class="form-label">
+                <p><strong>{% trans 'Shipping Address' %}</strong></p>
+            </div>
+            <form id="shipping-address-form" method="post" action="{% url 'save_shipping_address' %}">
+                {% csrf_token %}
+                {% if addresses %}
+                    {% for address in addresses %}
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="address" placeholder="{{ address.address }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="city" placeholder="{{ address.city }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="postal_code" placeholder="{{ address.postal_code }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-control" name="country" id="country-select">
+                                <option value="">Select Country...</option>
+                                {% for country in countries %}
+                                <option value="{{ country.name }}" {% if addresses and addresses.0.country.code == country.code %}selected{% endif %}>
+                                    {{ country.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Edit Address</button>
+                    {% endfor %}
+                {% else %}
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="address" placeholder="Shipping Address" required>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="city" placeholder="City" required>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="postal_code" placeholder="Postal Code" required>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-control" name="country" required>
+                            <option value="">Select Country...</option>
+                            {% for country in countries %}
+                            <option value="{{ country.code }}">
+                                {{ country.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Save Address</button>
+                {% endif %}
+            </form>
+            {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div> 
+    </div>
+</div>
+{% endblock %}

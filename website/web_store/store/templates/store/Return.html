@@ -1,0 +1,135 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="box">
+                <form id="return-form">
+                    {% csrf_token %}
+                    <h2>{% trans "Input order data" %}</h2>
+                    <div class="mb-3">
+                        <input class="form-control" type="email" name="email" placeholder="{% trans 'Your Email...' %}" required>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="order_id" placeholder="{% trans 'Order ID...' %}" required>
+                    </div>
+                    <button class="btn btn-primary" type="submit">{% trans 'Fetch Order' %}</button>
+                    
+                </form>
+            </div>
+            <div class="box">
+                <h2 id="choose-items-label" style="display:none;">{% trans "Choose items to return:" %}</h2>
+                <div id="order-items" class="row" style="display:none;">
+                    <div class="items-container row">
+                    </div>
+                </div>
+                <button id="proceed-button" class="btn btn-primary" style="display:none;">{% trans 'Proceed' %}</button>
+           </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var isUserAuthenticated = '{{ user.is_authenticated|lower }}';
+    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    document.getElementById('return-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = this.email.value;
+        var order_id = this.order_id.value;
+        
+        var data = {
+            'email': email,
+            'order_id': order_id
+        }
+
+        fetch('fetch_order_items/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.error) {
+                alert(data.error);
+            } else {
+                displayOrderItems(data.items);
+                document.getElementById('choose-items-label').style.display = 'block';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('proceed-button').addEventListener('click', function() {
+        var selectedItems = Array.from(document.querySelectorAll('input[name="return-item"]:checked')).map(item => item.value);
+        var orderId = document.querySelector('input[name="order_id"]').value;
+        
+        if (selectedItems.length > 0 && orderId) {
+            var itemPairs = selectedItems.map(val => {
+                var [itemId, orderItemId] = val.split('-');
+                return `items[]=${itemId}&orderItemIds[]=${orderItemId}`;
+            });
+            var url = `/return/return_details?${itemPairs.join('&')}&order_id=${orderId}`;
+
+            if (isUserAuthenticated === 'false') {
+                var email = document.querySelector('input[name="email"]').value;
+                if (email) {
+                    url += `&email=${encodeURIComponent(email)}`;
+                }
+            }
+
+            window.location.href = url;
+        } else {
+            alert('Please select at least one item to return and ensure the order ID is provided.');
+        }
+    });
+
+    function displayOrderItems(items) {
+        var orderItemsDiv = document.getElementById('order-items');
+        var chooseItemsLabel = document.getElementById('choose-items-label');
+        var proceedButton = document.getElementById('proceed-button');
+
+        orderItemsDiv.innerHTML = '';
+        chooseItemsLabel.style.display = 'none';
+        proceedButton.style.display = 'none';
+
+        var itemsListContainer = document.createElement('div');
+        itemsListContainer.classList.add('container-fluid');
+
+        items.forEach(item => {
+            var itemRow = document.createElement('div');
+            itemRow.classList.add('row', 'mb-2', 'align-items-center');
+
+            var itemNameCol = document.createElement('div');
+            itemNameCol.classList.add('col-8');
+            itemNameCol.textContent = `${item.name} ${item.color} ${item.length} - Quantity: ${item.quantity}`;
+
+            var itemCheckboxCol = document.createElement('div');
+            itemCheckboxCol.classList.add('col-4');
+            itemCheckboxCol.innerHTML = `<input type="checkbox" class="float-end" name="return-item" value="${item.id}-${item.orderItem_id}">`;
+
+            itemRow.appendChild(itemNameCol);
+            itemRow.appendChild(itemCheckboxCol);
+
+            itemsListContainer.appendChild(itemRow);
+        });
+
+        orderItemsDiv.appendChild(itemsListContainer);
+
+        if (items.length > 0) {
+            chooseItemsLabel.style.display = 'block';
+            proceedButton.style.display = 'block';
+        }
+
+        orderItemsDiv.style.display = 'block';
+    }
+
+</script>
+
+{% endblock content %}
